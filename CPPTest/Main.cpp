@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 using namespace std;
 
 //	각 문제를 해결했을 때마다, 해당 시점에서 commit 할 것.
@@ -9,6 +10,29 @@ int main()
 	//	1번
 	//	0~99 범위의 임의의 정수 100개를 저장하고, 오름차순으로 정렬하여 출력하시오.
 	//	단, 모든 변수는 int형 포인터만 사용할 것.
+
+	srand(time(NULL));
+	int* arrr=new int[100];
+	for(int i=0; i<100; i++)
+	{
+		arrr[i]=rand()%100;
+	}
+	for(int i=0; i<100; i++)
+	{
+		for(int j=0;j<100; j++)
+		{
+			if(arrr[i]<arrr[j])
+			{
+				int temp=arrr[j];
+				arrr[j]=arrr[i];
+				arrr[i]=temp;
+			}
+		}
+	}
+	for(int i=0; i<100; i++)
+	{
+		cout<<arrr[i]<<endl;
+	}
 	
 
 	//	2번
