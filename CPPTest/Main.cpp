@@ -1,9 +1,23 @@
 #include <iostream>
 #include <ctime>
+#include <string>
+#include <cstring>
+#include <fstream>
 using namespace std;
 
 //	각 문제를 해결했을 때마다, 해당 시점에서 commit 할 것.
 //	commit 메시지는 자유롭게 해도 됩니다.
+	  struct subject 
+	  {
+          string itemName;
+          int score;
+      };
+      struct student 
+	  {
+          string name;		// 학생이름
+          int subjectCount;	// 응시과목수
+          subject* pItem;		// 과목 목록
+      };
 
 int main()
 {
@@ -75,10 +89,62 @@ int main()
     //      subject* pItem;		// 과목 목록
     //  };
 
+	student Student[10];
 
+
+	ifstream list;
+	list.open("list.txt", ios::in);
+
+	int i = 0;
+
+	while (!list.eof())
+	{
+
+	list >> Student[i].name >> Student[i].subjectCount;
+
+	Student[i].pItem = new subject[Student[i].subjectCount];
+
+	for (int j = 0; j < Student[i].subjectCount; j++)
+	{
+	list >> Student[i].pItem[j].itemName >> Student[i].pItem[j].score;
+	}
+
+	i++;
+
+	}
+
+	cout <<"이름과 과목수를 입력해주세요"<<endl;
+
+	cin >> Student[i].name >> Student[i].subjectCount;
+
+	Student[i].pItem = new subject[Student[i].subjectCount];
+
+	cout << "과목과 과목점수 입력해주세요" << endl;
+
+	for (int j = 0; j < Student[i].subjectCount; j++)
+	{
+		cin >> Student[i].pItem[j].itemName >> Student[i].pItem[j].score;
+	}
+
+	for (int k = 0; k < i + 1; k++)
+	{
+		cout << " 학생이름: " << Student[k].name << " 응시 과목수: " << Student[k].subjectCount << " ";
+
+		for (int j = 0; j < Student[k].subjectCount; j++)
+		{
+			cout << Student[k].pItem[j].itemName << " : " << Student[k].pItem[j].score << " ";
+		}
+
+		cout << endl;
+
+	}
+
+
+	list.close();
 	
 	//	4번
 	//	교육자에게 하고싶은 말을 적으시오.
 	//	
+	// 잘 못따라가는 학생 부족하지만 열심히할게요!
 	return 0;
 }
